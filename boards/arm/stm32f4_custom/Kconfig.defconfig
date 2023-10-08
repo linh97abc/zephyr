@@ -8,4 +8,14 @@ if BOARD_STM32F4_CUSTOM
 config BOARD
 	default "stm32f4_custom"
 
+if NETWORKING
+
+	config NET_L2_ETHERNET
+	default y
+
+	# Required to satisfy dependency of networking stack on RNG
+	config TEST_RANDOM_GENERATOR
+	default y
+endif
+
 endif # BOARD_STM32F4_CUSTOM

@@ -137,3 +137,20 @@ zephyr_udc0: &usbotg_fs {
 	bus-speed = <125000>;
 	status = "okay";
 };
+
+&spi1 {
+	pinctrl-0 = <&spi1_sck_pa5 &spi1_miso_pa6 &spi1_mosi_pa7>;
+	pinctrl-names = "default";
+	cs-gpios = <&gpioe 7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+	status = "okay";
+
+	eth_w5500: eth_w5500@0 {
+		compatible = "wiznet,w5500";
+		reg = <0x0>;
+		zephyr,random-mac-address;
+		spi-max-frequency = <24000000>;
+		int-gpios = <&gpioe 9 GPIO_ACTIVE_LOW>;	/* D9 */
+		reset-gpios = <&gpioe 8 GPIO_ACTIVE_LOW>;	/* D8 */
+		status = "okay";
+	};
+};
